@@ -66,15 +66,17 @@ input {
     font-size: xx-large;
     font-style: italic;
     font-weight: 900;
+    margin-top: 50px;
 }
 
 #output-container > div {
     display: flex;
     gap: 20px;
-    margin-top: -60px;
+    margin-top: -90px;
 }
 
 #p-years, #p-months, #p-days {
     color: #834DFE;
     font-size: 35px;
 }
+
