@@ -72,7 +72,7 @@ input {
 #output-container > div {
     display: flex;
     gap: 20px;
-    margin-top: -90px;
+    margin-top: -80px;
 }
 
 #p-years, #p-months, #p-days {
