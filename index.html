@@ -95,7 +95,7 @@
         error.innerHTML = `<p style="margin-top: -0.3px; font-size: small; margin-right: 20px; color: red;">please insert correct month.</p>`
       }
       else{
-        if(diffYear < 0 || getDay.value > 32){
+        if(diffYear < 0 || getDay.value > 32 || diffYear < 9){
           getDay.style.border = "1px solid red"
           getMonth.style.border = "1px solid red"
           getYear.style.border = "1px solid red"
