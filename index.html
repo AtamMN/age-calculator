@@ -72,6 +72,10 @@
       let diffMonth = today.getMonth() - birthDate.getMonth();
       let diffDay = today.getDate() - birthDate.getDate();
 
+      resDay.innerHTML = "--"
+      resMonth.innerHTML = "--"
+      resYear.innerHTML = "--"
+
       if (diffDay < 0) {
         diffMonth--;
         diffDay += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
@@ -90,7 +94,7 @@
         getMonth.style.border = "1px solid red"
         error.innerHTML = `<p style="margin-top: -0.3px; font-size: small; margin-right: 20px; color: red;">please insert correct month.</p>`
       }
-      else {
+      else{
         if(diffYear < 0 || getDay.value > 32){
           getDay.style.border = "1px solid red"
           getMonth.style.border = "1px solid red"
