@@ -33,6 +33,7 @@
         </div>
       </div>
       <div id="submit">
+        <div id="error"></div>
         <button id="submit-btn" onclick="submit()"><i class="fa fa-angle-down" style="font-size:30px; color:white;"></i></button>
       </div>
       <div id="output-container">
@@ -56,68 +57,57 @@
     const getDay = document.getElementById('day')
     const getMonth = document.getElementById('month')
     const getYear = document.getElementById('year')
+    const error =  document.getElementById('error')
     
     const resDay = document.getElementById('p-days')
     const resMonth = document.getElementById('p-months')
     const resYear = document.getElementById('p-years')
     
     function submit(){
-      // tanggal lahir
-      const birthDate = new Date(`${getYear.value}-${getMonth.value}-${getDay.value}`);
 
-      // tanggal hari ini
+      const birthDate = new Date(`${getYear.value}-${getMonth.value}-${getDay.value}`);
       const today = new Date();
 
-      // selisih waktu dalam tahun, bulan, dan hari
       let diffYear = today.getFullYear() - birthDate.getFullYear();
       let diffMonth = today.getMonth() - birthDate.getMonth();
       let diffDay = today.getDate() - birthDate.getDate();
 
-      // jika hari lahir di akhir bulan, atur selisih bulan menjadi 1
       if (diffDay < 0) {
         diffMonth--;
         diffDay += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
       }
-
-      // jika bulan lahir di akhir tahun, atur selisih tahun menjadi 1 dan selisih bulan menjadi 0
       if (diffMonth < 0) {
         diffYear--;
         diffMonth += 12;
       }
 
-      // menampilkan umur dengan detail
-      resDay.innerHTML = diffDay
-      resMonth.innerHTML = diffMonth
-      resYear.innerHTML = diffYear
-    }
-
-    function updateInput(val){
-      console.log('ini hari', day)
-      console.log('ini bulan', month)
-      console.log('ini tahun', year)
-
-      val = parseInt(val)
-      const month31 = [1,3,5,7,8,10,12]
-      const month30 = [4,6,8]
-      const month29 = [2]
-
-
-      if(month31.includes(val)){
-        getDay.value = getDay.value < 32 ? getDay.value : 31
+      // submission validation
+      if( getYear.value % 4 == 0 ? (getDay.value > 29 && getMonth.value == 2) : (getDay.value > 28 && getMonth.value == 2)){
+        getDay.style.border = "1px solid red"
+        error.innerHTML = `<p style="margin-top: -0.3px; font-size: small; margin-right: 20px; color: red;">please insert correct day.</p>`
       }
-      if(month30.includes(val)){
-        getDay.value = getDay.value < 31 ? getDay.value : 30
+      else if(getMonth.value > 12 || getDay.value < 0){
+        getMonth.style.border = "1px solid red"
+        error.innerHTML = `<p style="margin-top: -0.3px; font-size: small; margin-right: 20px; color: red;">please insert correct month.</p>`
       }
-      if(month29.includes(val)){
-        if(getYear.value % 4 == 0){
-          getDay.value = getDay.value < 30 ? getDay.value : 29
+      else {
+        if(diffYear < 0 || getDay.value > 32){
+          getDay.style.border = "1px solid red"
+          getMonth.style.border = "1px solid red"
+          getYear.style.border = "1px solid red"
+          error.innerHTML = `<p style="margin-top: -0.3px; font-size: small; margin-right: 20px; color: red;">input is out of range!</p>`
         } else {
-          getDay.value = getDay.value < 29 ? getDay.value : 28
+          resDay.innerHTML = diffDay
+          resMonth.innerHTML = diffMonth
+          resYear.innerHTML = diffYear
+          getDay.style.border = ""
+          getMonth.style.border = ""
+          getYear .style.border = ""
+          error.innerHTML = ""
         }
       }
 
     }
-    
   </script>
 </body>
 </html>
